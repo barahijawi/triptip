@@ -1,5 +1,5 @@
 {
-    "name": "batta/triptip",
+    "name": "barahijawi/triptip",
     "description": "Trip Tips script",
     "require": {
         "php": "^5.6"
