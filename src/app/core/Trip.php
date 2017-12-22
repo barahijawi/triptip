@@ -37,11 +37,7 @@ class Trip
         $this->boardings = $boardings;
     }
 
-    public function addBoarding($boarding)
-    {
-        $this->boardings[] = $boarding;
-    }
-
+  
     /**
      * Sort boardings
      * This function sorts the boardings in order
@@ -77,6 +73,7 @@ class Trip
             $transportationList[] = new static::$transportations[$type]($boarding);
         }
 
+        //var_dump($transportationList);
         return $transportationList;
 
     }
@@ -86,12 +83,12 @@ class Trip
      */
     public function tripString()
     {
-        foreach ($this->getTransportations() as $idx => $transportaton) {
+        foreach ($this->getTransportations() as $index => $transportaton) {
             // var_dump($transportaton);
-            echo ($idx + 1) . ". " . $transportaton->getMessage() . PHP_EOL . PHP_EOL;
+            echo ($index + 1) . ". " . $transportaton->getMessage() . PHP_EOL . PHP_EOL;
             // Final dstination message
-            if ($idx == (count($this->boardings) - 1)) {
-                echo ($idx + 2) . ". " . $transportaton::MESSAGE_FINAL_DESTINATION . PHP_EOL;
+            if ($index == (count($this->sortedBoardings) - 1)) {
+                echo ($index + 2) . ". " . $transportaton::MESSAGE_FINAL_DESTINATION . PHP_EOL;
             }
         }
 

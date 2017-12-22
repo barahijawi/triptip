@@ -36,11 +36,12 @@ class dataCrawler
 
     private function getStartAndDestination()
     {
-        $isDestination = true;
-        $isStart = true;
+        
         for ($i = 0, $max = count($this->data); $i < $max; $i++) {
+            $isDestination = true;
+            $isStart = true;
             // Foreach trip we test for the arrival city and the departure city
-            foreach (($this->data) as $index => $val) {
+            foreach ($this->data as $index => $val) {
                 // If current trip departure is another trip arrivel, then we have a previous trip
                 if (strcasecmp($this->data[$i]['Departure'], $val['Arrival']) == 0) {
                     $isStart = false;
@@ -52,16 +53,19 @@ class dataCrawler
             }
             // Assign the last and the first trip
             if ($isStart) {
+                //echo('start ==> '.$this->data[$i]['Departure'].'<br/>');
                 // It is the first trip so we put it on the top
                 array_unshift($this->data, $this->data[$i]);
                 unset($this->data[$i]);
             } elseif ($isDestination) {
+                //echo('finish ==> '.$this->data[$i]['Arrival'].'<br/>');
                 // It is the last trip so we put it at the bottom
                 array_push($this->data, $this->data[$i]);
                 unset($this->data[$i]);
             }
         }
         $this->data = array_merge($this->data);
+        //var_dump($this->data);
     }
 
     public function pathOrder()
